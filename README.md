@@ -82,6 +82,10 @@ If this guide helped you and you decide to buy a Plaud device, you may use this 
 
 For Plaud-related MakerWorld projects, visit the [Plaud collection on MakerWorld](https://makerworld.com/collections/33911427). More work is available on the [JorgeRui MakerWorld profile](https://makerworld.com/en/@JorgeRui).
 
+### Optional personal tip
+
+If you would simply like to say thank you, you can send a voluntary personal tip through [PayPal.Me](https://paypal.me/jorgerui). This is a donation only: no product or service is being sold or provided in return.
+
 ## Reporting a security issue
 
 Please do not open a public issue with a token, transcript, log or NAS address. See [SECURITY.md](SECURITY.md) for a safe reporting template.
