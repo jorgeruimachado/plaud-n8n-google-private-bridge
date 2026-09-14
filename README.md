@@ -71,6 +71,17 @@ The unit tests do not contact Plaud, Google, n8n or any external service:
 npm test
 ```
 
+## Support this project
+
+If this guide helped you and you decide to buy a Plaud device, you may use this creator/affiliate link. Purchases made through it may support the maintainer at no extra cost to you.
+
+- [Plaud tracking link](https://bit.ly/4fDrqJj)
+- Creator code: `JorgeRui`
+- Discount: **10% off**
+- Available markets: United States, United Kingdom, and Germany
+
+For Plaud-related MakerWorld projects, visit the [Plaud collection on MakerWorld](https://makerworld.com/collections/33911427). More work is available on the [JorgeRui MakerWorld profile](https://makerworld.com/en/@JorgeRui).
+
 ## Reporting a security issue
 
 Please do not open a public issue with a token, transcript, log or NAS address. See [SECURITY.md](SECURITY.md) for a safe reporting template.
