@@ -1,0 +1,26 @@
+services:
+  plaud-bridge:
+    # Build or choose an image that has Node.js and the official Plaud CLI installed.
+    image: ${PLAUD_BRIDGE_IMAGE:?Set PLAUD_BRIDGE_IMAGE in your local .env}
+    container_name: plaud-bridge
+    user: "${PUID:-1000}:${PGID:-1000}"
+    entrypoint: ["node", "/project/bridge.mjs"]
+    restart: unless-stopped
+    environment:
+      HOME: /project/auth
+      TZ: ${TZ:-UTC}
+      BRIDGE_ROOT: /project
+    volumes:
+      # Keep this directory private. It contains OAuth sessions, tokens and transcripts.
+      - ${PLAUD_BRIDGE_ROOT:?Set PLAUD_BRIDGE_ROOT in your local .env}:/project
+    networks:
+      - n8n_backend
+    mem_limit: 256m
+    cpu_shares: 128
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+
+networks:
+  n8n_backend:
+    external: true

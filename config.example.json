@@ -1,0 +1,5 @@
+{
+  "enabled": false,
+  "webhook_url": "http://n8n:5678/webhook/plaud-bridge-v1",
+  "webhook_token": "generate-a-long-random-value-locally"
+}

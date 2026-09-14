@@ -1,0 +1,8 @@
+{
+  "name": "plaud-n8n-google-private-bridge",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test.mjs"
+  }
+}

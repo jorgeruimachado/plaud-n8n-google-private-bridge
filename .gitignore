@@ -1,0 +1,12 @@
+# Runtime secrets and user data — never commit these.
+config.json
+auth/
+state/
+.env
+.env.*
+!config.example.json
+
+# Local tooling
+node_modules/
+npm-debug.log*
+.DS_Store
