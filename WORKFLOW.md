@@ -6,6 +6,26 @@ This guide deliberately uses the n8n interface to attach credentials. A public w
 
 Import [n8n-workflow.template.json](n8n-workflow.template.json) into n8n. It contains the bridge intake, validation, AI interpretation, proposal persistence, and optional Google Calendar/Tasks branches — but **no credentials**. Google writes are disabled by a safety switch in the template. Complete the steps below before enabling it.
 
+## Values each person must configure
+
+Nothing in this table is shared between installations. Values marked **secret** must stay only in the user's private NAS, n8n credential store, or `.env` file — never in a workflow export, screenshot, issue or Git commit.
+
+| Where | Value in the template | What to set | Notes |
+| --- | --- | --- | --- |
+| `config.json` | `enabled: false` | Keep `false` for initial checks; set `true` only after the baseline and test note succeed. | Do not start with old recordings. |
+| `config.json` | `webhook_url` | The URL of the user's n8n Webhook node, including `/webhook/plaud-bridge-v1`. | `http://n8n:5678/...` works only when the container service is called `n8n` on the same private Docker network. |
+| `config.json` | `webhook_token` | A newly generated, long random value. **Secret.** | Use exactly the same value in the two n8n Header Auth credentials below. |
+| n8n: **Receive Plaud transcript** | Webhook path `plaud-bridge-v1` | Leave it unchanged unless `webhook_url` is changed to the same new path. | The path must match exactly. |
+| n8n: **Receive Plaud transcript** | Header Auth credential | Create a credential with header `X-Plaud-Bridge-Key` and the `webhook_token` value. **Secret.** | This authenticates bridge → n8n. |
+| n8n: **Save proposal on private bridge** | URL `http://plaud-bridge:8090/proposals` | Change only `plaud-bridge` if the user's bridge container has a different service name. Keep `/proposals`. | n8n and bridge must be on the same private Docker network. |
+| n8n: **Save proposal on private bridge** | Header Auth credential | Use a credential with the same header and `webhook_token`. **Secret.** | This authenticates n8n → bridge. |
+| n8n: **Interpret explicit requests** | `gpt-4o-mini` | Select a model available to the user's AI credential that can reliably return JSON. | The API key is attached as an n8n credential, never put in a node field. |
+| n8n: **Create Google Calendar event** | `primary` | Keep `primary`, or select the user's intended calendar. | Calendar ID is personal; do not publish it. |
+| n8n: **Create Google Task** | `@default` | Keep the default list, or select the user's intended task list. | A dedicated list such as `Review` is useful for uncertain tasks. |
+| `.env` / Compose | `TZ` and `timezone: UTC` | Set both to the user's time zone, for example `Europe/Lisbon`. | They should match so dates and times are interpreted consistently. |
+| `.env` / Compose | `PLAUD_BRIDGE_ROOT`, `PLAUD_BRIDGE_IMAGE`, `PUID`, `PGID`, `n8n_backend` | Set private NAS paths, image/user IDs and the existing Docker network name. | These values identify the user's installation; never publish them. |
+| n8n: **Enable Google writes only after testing** | `ENABLE_GOOGLE_WRITES = false` | Change to `true` only after the controlled test and persistent deduplication are in place. | This is deliberately off on import. |
+
 ## 1. Credentials created by each user
 
 Create these inside the user's own n8n instance:

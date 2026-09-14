@@ -171,9 +171,9 @@
       "typeVersion": 1,
       "position": [260, -300],
       "parameters": {
-        "content": "## Safe import template\n1. Attach your own Header Auth credential to the Webhook and Save Proposal nodes.\n2. Attach your own OpenAI, Google Calendar and Google Tasks credentials.\n3. Keep the workflow inactive until one synthetic test has produced only a saved proposal.\n4. Add a persistent deduplication store keyed by `recording_id + action index` before enabling Google writes.\n5. Change `ENABLE_GOOGLE_WRITES` to `true` only after the controlled test.\n\nNo credential, token, private URL, NAS address or calendar ID is included in this file.",
-        "height": 260,
-        "width": 780
+        "content": "## Configure before activating\n\n**1. Bridge → n8n**\n- In private `config.json`, set `webhook_url` to this Webhook's URL and create a long random `webhook_token`.\n- On **Receive Plaud transcript**, attach Header Auth: `X-Plaud-Bridge-Key` = that token.\n\n**2. n8n → bridge**\n- **Save proposal on private bridge** assumes the Docker service name `plaud-bridge`. Change only that hostname if yours differs.\n- Attach the same Header Auth credential to this node.\n\n**3. Choose your services**\n- Attach your own OpenAI, Google Calendar and Google Tasks credentials.\n- Change `gpt-4o-mini`, `primary`, `@default`, and UTC only if appropriate for your account/time zone.\n\n**4. Safety**\n- Keep the workflow inactive; test with a synthetic note.\n- Add persistent deduplication keyed by `recording_id + action index`.\n- Only then change `ENABLE_GOOGLE_WRITES` from `false` to `true`.\n\nNever export or publish credentials, tokens, private URLs, NAS addresses, calendar IDs or transcripts.",
+        "height": 440,
+        "width": 820
       }
     }
   ],
