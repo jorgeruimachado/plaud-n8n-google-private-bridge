@@ -40,7 +40,7 @@ Google uses OAuth 2.0; access tokens are short-lived and refresh tokens must be 
 3. Copy `config.example.json` to `config.json`. Generate a unique random token locally, set the n8n webhook URL for your internal Docker network, and leave `enabled` as `false`.
 4. Create a local `.env` next to `compose.yaml` with your private NAS path, image, user/group IDs and time zone. Do not commit it.
 5. Build/select an image with Node.js 20+ and start the bridge with `docker compose up -d`.
-6. Configure the n8n workflow following [WORKFLOW.md](WORKFLOW.md). Create all credentials in n8n manually; never import a credential file from someone else.
+6. Import [n8n-workflow.template.json](n8n-workflow.template.json) into n8n, then follow [WORKFLOW.md](WORKFLOW.md). Create all credentials in n8n manually; never import a credential file from someone else. The imported workflow is inactive and its Google-write safety switch is off.
 7. Run the bridge once with `enabled: false` to check `/health`. Then enable it **without a webhook URL** for one cycle if you want to create the historical baseline before connecting n8n.
 8. Send one new, harmless test note. Confirm it is stored as a proposal and that no unwanted event/task appears. Only then enable the Calendar and Tasks creation nodes.
 

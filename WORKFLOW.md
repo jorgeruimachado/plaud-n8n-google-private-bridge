@@ -2,6 +2,10 @@
 
 This guide deliberately uses the n8n interface to attach credentials. A public workflow JSON that includes credential IDs, callback URLs or encrypted credential blobs is not portable and may expose information about its author.
 
+## Importable template
+
+Import [n8n-workflow.template.json](n8n-workflow.template.json) into n8n. It contains the bridge intake, validation, AI interpretation, proposal persistence, and optional Google Calendar/Tasks branches — but **no credentials**. Google writes are disabled by a safety switch in the template. Complete the steps below before enabling it.
+
 ## 1. Credentials created by each user
 
 Create these inside the user's own n8n instance:
